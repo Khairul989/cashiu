@@ -17,7 +17,13 @@
     "docker:dev:rebuild": "docker compose down --rmi all && docker compose up -d --build",
     "docker:logs": "docker compose logs -f app",
     "docker:logs:all": "docker compose logs -f",
-    "docker:commands": "docker compose exec app node ace $COMMAND"
+    "docker:commands": "docker compose exec app node ace $COMMAND",
+    "docker:prod": "docker compose -f docker-compose.prod.yml up -d --build",
+    "docker:prod:rebuild": "docker compose -f docker-compose.prod.yml down --rmi all && docker compose -f docker-compose.prod.yml up -d --build",
+    "docker:prod:logs": "docker compose -f docker-compose.prod.yml logs -f app",
+    "docker:prod:logs:all": "docker compose -f docker-compose.prod.yml logs -f",
+    "docker:prod:commands": "docker compose -f docker-compose.prod.yml exec app node ace $COMMAND",
+    "docker:prod:down": "docker compose -f docker-compose.prod.yml down -v --remove-orphans"
   },
   "imports": {
     "#controllers/*": "./app/controllers/*.js",

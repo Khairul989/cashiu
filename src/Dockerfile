@@ -1,25 +1,47 @@
-# Use the official Node.js 20 image as the base
-FROM node:22
+# Multi-stage production Dockerfile
+FROM node:20-alpine AS base
 
-# Install PM2 globally to run the AdonisJS server
-RUN npm install -g pm2
-
-# Install bun in order for pm2 to work
-RUN npm install -g bun
-
-# Set the working directory inside the container
+# Install dependencies only when needed
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Copy package.json and package-lock.json to install dependencies
-COPY package*.json ./
+# Copy package files
+COPY package.json package-lock.json* ./
+RUN npm ci --only=production && npm cache clean --force
 
-COPY .npmrc ./
+# Rebuild the source code only when needed
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
 
-# Install all dependencies (including dev dependencies)
-RUN npm i
+# Build the application
+RUN npm run build
 
-# Expose the development port (AdonisJS default is 3333)
+# Production image, copy all the files and run node
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+# Create non-root user
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nodejs
+
+# Copy built application
+COPY --from=builder --chown=nodejs:nodejs /app/build ./build
+COPY --from=builder --chown=nodejs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=nodejs:nodejs /app/package.json ./package.json
+COPY --from=builder --chown=nodejs:nodejs /app/bin ./bin
+
+# Set permissions
+RUN mkdir -p /app/storage/logs && chown -R nodejs:nodejs /app/storage
+
+USER nodejs
+
 EXPOSE 3333
 
-# Start the AdonisJS development server with hot-reloading
-CMD [ "pm2-runtime", "start", "npm", "--", "run", "dev" ]
+ENV PORT=3333
+
+CMD ["node", "bin/server.js"]
