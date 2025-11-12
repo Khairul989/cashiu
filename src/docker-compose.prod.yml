@@ -9,6 +9,8 @@ services:
       - "${PORT:-3333}:3333"
     env_file:
       - .env
+    environment:
+      - COMPOSE_HTTP_TIMEOUT=480
     depends_on:
       - mysql
       - redis
@@ -16,6 +18,8 @@ services:
     networks:
       - production_network
     restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3333/health"]
       interval: 30s
@@ -37,6 +41,8 @@ services:
     networks:
       - production_network
     restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
     command: --default-authentication-plugin=mysql_native_password
 
   redis:
@@ -48,6 +54,8 @@ services:
     networks:
       - production_network
     restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
     command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-}
 
   elasticsearch:
@@ -68,6 +76,8 @@ services:
     networks:
       - production_network
     restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
 
   nginx:
     image: nginx:alpine
@@ -83,6 +93,8 @@ services:
     networks:
       - production_network
     restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
 
 volumes:
   mysql_production_data:
