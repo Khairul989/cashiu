@@ -22,6 +22,7 @@ RUN npm run build
 
 # Production image, copy all the files and run node
 FROM base AS runner
+RUN apk add --no-cache libc6-compat python3 make g++
 WORKDIR /app
 
 ENV NODE_ENV=production
