@@ -39,6 +39,8 @@ services:
     networks:
       - production_network
     restart: unless-stopped
+    security_opt:
+      - seccomp=unconfined
     command: --default-authentication-plugin=mysql_native_password
 
   redis:
@@ -50,6 +52,8 @@ services:
     networks:
       - production_network
     restart: unless-stopped
+    security_opt:
+      - seccomp=unconfined
     command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-}
 
   elasticsearch:
@@ -70,6 +74,8 @@ services:
     networks:
       - production_network
     restart: unless-stopped
+    security_opt:
+      - seccomp=unconfined
 
   nginx:
     image: nginx:alpine
@@ -85,6 +91,8 @@ services:
     networks:
       - production_network
     restart: unless-stopped
+    security_opt:
+      - seccomp=unconfined
 
 volumes:
   mysql_production_data:
