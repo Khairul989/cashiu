@@ -9,7 +9,7 @@ WORKDIR /app
 # Copy package files
 COPY package.json package-lock.json* ./
 # Install all dependencies to resolve peer dependencies properly
-RUN npm ci --include=dev && npm cache clean --force
+RUN npm ci --include=dev --legacy-peer-deps && npm cache clean --force
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -36,7 +36,7 @@ COPY --from=builder --chown=nodejs:nodejs /app/package.json ./package.json
 COPY --from=builder --chown=nodejs:nodejs /app/bin ./bin
 
 # Install only production dependencies for final image
-RUN npm ci --only=production --ignore-scripts && npm cache clean --force
+RUN npm ci --only=production --ignore-scripts --legacy-peer-deps && npm cache clean --force
 
 # Set permissions
 RUN mkdir -p /app/storage/logs && chown -R nodejs:nodejs /app/storage
