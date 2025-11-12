@@ -17,22 +17,27 @@ RUN apk add --no-cache tzdata curl aws-cli caddy bind-tools dnsmasq && \
 
 FROM base as production-deps
 WORKDIR /IA
+RUN apk add --no-cache libc6-compat python3 make g++
 ADD src/.npmrc src/package.json src/package-lock.json ./
 RUN npm install --legacy-peer-deps
 RUN npm install pm2 -g && pm2 update
 
 # Build stage
 FROM base as node-build
+RUN apk add --no-cache libc6-compat python3 make g++
 WORKDIR /IA
 COPY --from=production-deps /IA/node_modules /IA/node_modules
 ADD src/. .
 RUN node ace build
 
 FROM base as npm-omit
+RUN apk add --no-cache libc6-compat python3 make g++
 WORKDIR /IA
 COPY --from=production-deps /IA/node_modules /IA/node_modules
 COPY --from=node-build /IA/build /IA
 COPY --from=node-build /IA/payloads /IA/payloads
+COPY --from=node-build /IA/package.json /IA/package.json
+COPY --from=node-build /IA/package-lock.json /IA/package-lock.json
 RUN npm ci --omit="dev" --legacy-peer-deps
 
 FROM base
