@@ -18,7 +18,7 @@ RUN apk add --no-cache tzdata curl aws-cli caddy bind-tools dnsmasq && \
 FROM base as production-deps
 WORKDIR /IA
 ADD src/.npmrc src/package.json src/package-lock.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 RUN npm install pm2 -g && pm2 update
 
 # Build stage
