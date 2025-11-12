@@ -16,6 +16,8 @@ services:
     networks:
       - production_network
     restart: unless-stopped
+    security_opt:
+      - seccomp=unconfined
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3333/health"]
       interval: 30s
