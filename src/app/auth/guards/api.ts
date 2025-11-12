@@ -134,8 +134,15 @@ export class ApiGuard<UserProvider extends ApiUserProviderContract<unknown>>
   }
 
   async authenticateWithOAuth(): Promise<void> {
+    const normalizeHeaders = (headers: Record<string, any>): Record<string, string> => {
+      return Object.entries(headers).reduce((acc, [key, value]) => {
+        acc[key] = Array.isArray(value) ? value[0] : (value ?? '')
+        return acc
+      }, {} as Record<string, string>)
+    }
+
     const oauthRequest = new Request({
-      headers: this.#ctx.request.headers(),
+      headers: normalizeHeaders(this.#ctx.request.headers()),
       body: this.#ctx.request.body(),
       method: this.#ctx.request.method(),
       query: this.#ctx.request.qs(),

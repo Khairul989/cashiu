@@ -5,8 +5,15 @@ import { Request, Response } from '@node-oauth/oauth2-server'
 
 export default class OAuthController {
   public async authorize({ request, response, auth }: HttpContext) {
+    const normalizeHeaders = (headers: Record<string, any>): Record<string, string> => {
+      return Object.entries(headers).reduce((acc, [key, value]) => {
+        acc[key] = Array.isArray(value) ? value[0] : (value ?? '')
+        return acc
+      }, {} as Record<string, string>)
+    }
+
     const oauthRequest = new Request({
-      headers: request.headers(),
+      headers: normalizeHeaders(request.headers()),
       body: request.body(),
       method: request.method(),
       query: request.qs(),
@@ -51,8 +58,15 @@ export default class OAuthController {
    * @responseBody 200 - {"access_token": "string", "token_type": "string", "expires_in": 3600, "refresh_token": "string", "scope": "string"}
    */
   public async token({ request, response }: HttpContext) {
+    const normalizeHeaders = (headers: Record<string, any>): Record<string, string> => {
+      return Object.entries(headers).reduce((acc, [key, value]) => {
+        acc[key] = Array.isArray(value) ? value[0] : (value ?? '')
+        return acc
+      }, {} as Record<string, string>)
+    }
+
     const oauthRequest = new Request({
-      headers: request.headers(),
+      headers: normalizeHeaders(request.headers()),
       body: request.body(),
       method: request.method(),
       query: request.qs(),
