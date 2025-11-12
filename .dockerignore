@@ -1,0 +1,7 @@
+src/node_modules
+src/npm-debug.log
+src/Dockerfile
+src/docker-compose.yml
+src/.dockerignore
+
+.dockerignore

@@ -1,0 +1,115 @@
+image: node:20
+clone:
+  depth: full
+
+definitions:
+  caches:
+      npm-cache: ~/.npm/
+      nextcache: src/.next/cache
+  steps:
+    - step: &security_scan
+        name: Scan secrets
+        script:
+          - pipe: atlassian/git-secrets-scan:1.2.1
+    - step: &docker_build
+        name: Dockerization
+        services:
+          - docker
+        caches:
+          - docker                
+        script:
+          - export DOCKER_BUILDKIT=1
+          - docker build -t $AWS_BUILD_NAME:latest .          
+          - docker save --output image.docker $AWS_BUILD_NAME:latest
+        artifacts:
+          - image.docker
+    - step: &update_ecr
+        name: Update ecr
+        services:
+          - docker
+        oidc: true
+        script:
+          - docker load --input image.docker
+          - docker tag $AWS_BUILD_NAME:latest $AWS_BUILD_NAME:$BITBUCKET_BUILD_NUMBER
+          - pipe: atlassian/aws-ecr-push-image:2.4.0
+            variables:
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              AWS_OIDC_ROLE_ARN: $AWS_DEFAULT_ROLE
+              IMAGE_NAME: $AWS_BUILD_NAME
+              TAGS: '$BITBUCKET_BUILD_NUMBER latest'
+    - step: &update_ecs
+        name: Update ecs
+        oidc: true
+        script:              
+          - pipe: atlassian/aws-ecs-deploy:1.12.1
+            variables:
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              AWS_OIDC_ROLE_ARN: $AWS_DEFAULT_ROLE
+              CLUSTER_NAME: $AWS_ECS_CLUSTER
+              SERVICE_NAME: $AWS_WEB_ECS_SERVICE
+              FORCE_NEW_DEPLOYMENT: 'true'
+          - pipe: atlassian/aws-ecs-deploy:1.12.1
+            variables:
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              AWS_OIDC_ROLE_ARN: $AWS_DEFAULT_ROLE
+              CLUSTER_NAME: $AWS_ECS_CLUSTER
+              SERVICE_NAME: $AWS_API_ECS_SERVICE
+              FORCE_NEW_DEPLOYMENT: 'true'
+
+pipelines:
+  custom:
+    development:
+      - step:
+          name: Check Branch
+          script: 
+            - if [[ $BITBUCKET_BRANCH != develop ]]; then exit 1 ; fi
+      - stage:
+          name: Build and deploy for Dev
+          deployment: Development
+          steps:
+            - step: *security_scan
+            - step: *docker_build            
+            - step: *update_ecr
+            - step: *update_ecs
+    master:
+       - step:
+           name: Check Branch
+           script: 
+             - if [[ $BITBUCKET_BRANCH != master ]]; then exit 1 ; fi
+       - stage:
+           name: Build and deploy for Production
+           deployment: Production
+           steps:
+             - step: *security_scan
+             - step: *docker_build            
+             - step: *update_ecr
+             - step: *update_ecs
+
+    temp:
+       - step:
+           name: Check Branch
+           script: 
+             - if [[ $BITBUCKET_BRANCH != master ]]; then exit 1 ; fi
+       - stage:
+           name: Build and deploy for Production
+           deployment: temp
+           steps:
+             - step: *security_scan
+             - step: *docker_build            
+             - step: *update_ecr
+             - step: *update_ecs
+#  branches:
+#    main:
+#      - step:
+#          name: Check Branch
+#          script: 
+#            - if [[ $BITBUCKET_BRANCH != main ]]; then exit 1 ; fi
+#      - stage:
+#          name: Build and deploy for Prod
+#          deployment: Production
+#          steps:
+#            - step: *node_build
+#            - step: *security_scan
+#            - step: *docker_build
+#            - step: *update_ecr
+#            - step: *update_ecs

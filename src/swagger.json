@@ -1,0 +1,4817 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Cashback App",
+    "version": "1.0.0",
+    "description": "Get Cashback from Shopee MY"
+  },
+  "components": {
+    "responses": {
+      "Forbidden": {
+        "description": "Access token is missing or invalid"
+      },
+      "Accepted": {
+        "description": "The request was accepted"
+      },
+      "Created": {
+        "description": "The resource has been created"
+      },
+      "NotFound": {
+        "description": "The resource has been created"
+      },
+      "NotAcceptable": {
+        "description": "The resource has been created"
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "BasicAuth": {},
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "api-key"
+      }
+    },
+    "schemas": {
+      "Any": {
+        "description": "Any JSON object not defined as schema"
+      },
+      "PaginationMeta": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": 100,
+            "nullable": false
+          },
+          "page": {
+            "type": "number",
+            "example": 2,
+            "nullable": false
+          },
+          "perPage": {
+            "type": "number",
+            "example": 10,
+            "nullable": false
+          },
+          "currentPage": {
+            "type": "number",
+            "example": 3,
+            "nullable": false
+          },
+          "lastPage": {
+            "type": "number",
+            "example": 10,
+            "nullable": false
+          },
+          "firstPage": {
+            "type": "number",
+            "example": 1,
+            "nullable": false
+          },
+          "lastPageUrl": {
+            "type": "string",
+            "example": "/?page=10",
+            "nullable": false
+          },
+          "firstPageUrl": {
+            "type": "string",
+            "example": "/?page=1",
+            "nullable": false
+          },
+          "nextPageUrl": {
+            "type": "string",
+            "example": "/?page=6",
+            "nullable": false
+          },
+          "previousPageUrl": {
+            "type": "string",
+            "example": "/?page=5",
+            "nullable": false
+          }
+        }
+      },
+      "AccessToken": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "user_id": {
+            "type": "number",
+            "example": 434
+          },
+          "client_id": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "Lorem Ipsum"
+            }
+          },
+          "revoked": {
+            "type": "boolean",
+            "example": true
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "expires_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": null
+          },
+          "client": {
+            "$ref": "#/components/schemas/Client",
+            "example": null
+          },
+          "refresh_token": {
+            "$ref": "#/components/schemas/RefreshToken",
+            "example": null
+          }
+        },
+        "description": "AccessToken (Model)"
+      },
+      "ActionReason": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 604
+          },
+          "type": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "reason": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "description": {
+            "type": "string",
+            "example": "Lorem ipsum dolor sit amet"
+          },
+          "suggestion": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "ActionReason (Model)"
+      },
+      "AuthCode": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "user_id": {
+            "type": "number",
+            "example": 257
+          },
+          "client_id": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "redirect": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "Lorem Ipsum"
+            }
+          },
+          "code_challenge": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "code_challenge_method": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "revoked": {
+            "type": "boolean",
+            "example": true
+          },
+          "expires_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": null
+          },
+          "client": {
+            "$ref": "#/components/schemas/Client",
+            "example": null
+          }
+        },
+        "description": "AuthCode (Model)"
+      },
+      "Bank": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 242
+          },
+          "bank_name": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "abbreviation": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "swift_code": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "logo_url": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "is_active": {
+            "type": "boolean",
+            "example": true
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "Bank (Model)"
+      },
+      "Category": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 668
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "description": {
+            "type": "string",
+            "example": "Lorem ipsum dolor sit amet"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "Category (Model)"
+      },
+      "Client": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "user_id": {
+            "type": "number",
+            "example": 224
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "secret": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "provider": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "redirect": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "Lorem Ipsum"
+            }
+          },
+          "personal_access_client": {
+            "type": "boolean",
+            "example": true
+          },
+          "password_client": {
+            "type": "boolean",
+            "example": true
+          },
+          "revoked": {
+            "type": "boolean",
+            "example": true
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "Client (Model)"
+      },
+      "Conversion": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 50
+          },
+          "conversion_id": {
+            "type": "number",
+            "example": 481
+          },
+          "seller_id": {
+            "type": "number",
+            "example": 306
+          },
+          "product_id": {
+            "type": "number",
+            "example": 968
+          },
+          "user_id": {
+            "type": "number",
+            "example": 800
+          },
+          "offer_id": {
+            "type": "number",
+            "example": 859
+          },
+          "order_id": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "click_id": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "category": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "datetime_conversion": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "myr_sale_amount": {
+            "type": "number",
+            "example": 752
+          },
+          "myr_payout": {
+            "type": "number",
+            "example": 516
+          },
+          "seller_commission_rate": {
+            "type": "number",
+            "example": 370
+          },
+          "cashback_payout": {
+            "type": "number",
+            "example": 522
+          },
+          "adv_subs": {
+            "$ref": "#/components/schemas/Record<string, string",
+            "example": null
+          },
+          "aff_subs": {
+            "$ref": "#/components/schemas/Record<string, string",
+            "example": null
+          },
+          "status_id": {
+            "type": "number",
+            "example": 72
+          },
+          "action_reason_id": {
+            "type": "number",
+            "example": 118
+          },
+          "withdrawal_id": {
+            "type": "number",
+            "example": 231
+          },
+          "remarks": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "status": {
+            "$ref": "#/components/schemas/MasterLookup",
+            "example": null
+          },
+          "action_reason": {
+            "$ref": "#/components/schemas/ActionReason",
+            "example": null
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": null
+          },
+          "seller": {
+            "$ref": "#/components/schemas/Seller",
+            "example": null
+          },
+          "product": {
+            "$ref": "#/components/schemas/Product",
+            "example": null
+          },
+          "click": {
+            "$ref": "#/components/schemas/TrackingLink",
+            "example": null
+          }
+        },
+        "description": "Conversion (Model)"
+      },
+      "DeletedModel": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 554
+          },
+          "key": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "model": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "values": {
+            "$ref": "#/components/schemas/object",
+            "example": null
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "DeletedModel (Model)"
+      },
+      "DeviceToken": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 448
+          },
+          "user_id": {
+            "type": "number",
+            "example": 361
+          },
+          "token": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "info": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "expired_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "DeviceToken (Model)"
+      },
+      "Feedback": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 885
+          },
+          "user_id": {
+            "type": "number",
+            "example": 706
+          },
+          "data": {
+            "$ref": "#/components/schemas/Record<string, unknown>",
+            "example": null
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "Feedback (Model)"
+      },
+      "MasterLookup": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 968
+          },
+          "type": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "value": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "is_active": {
+            "type": "boolean",
+            "example": true
+          },
+          "description": {
+            "type": "string",
+            "example": "Lorem ipsum dolor sit amet"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "MasterLookup (Model)"
+      },
+      "MissingCashback": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 236
+          },
+          "conversion_id": {
+            "type": "number",
+            "example": 224
+          },
+          "user_id": {
+            "type": "number",
+            "example": 86
+          },
+          "email": {
+            "type": "string",
+            "example": "johndoe@example.com",
+            "format": "email"
+          },
+          "click_id": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "order_id": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "status_id": {
+            "type": "number",
+            "example": 237
+          },
+          "remarks": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "updated_by": {
+            "type": "number",
+            "example": 600
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "status": {
+            "$ref": "#/components/schemas/MasterLookup",
+            "example": null
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": null
+          },
+          "tracking_link": {
+            "$ref": "#/components/schemas/TrackingLink",
+            "example": null
+          }
+        },
+        "description": "MissingCashback (Model)"
+      },
+      "Notification": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 693
+          },
+          "notifiable_id": {
+            "type": "number",
+            "example": 32
+          },
+          "data": {
+            "$ref": "#/components/schemas/DatabaseChannelData",
+            "example": null
+          },
+          "read_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2021-03-23T16:13:08.489+01:00"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": null
+          }
+        },
+        "description": "Notification (Model)"
+      },
+      "Platform": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 987
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "logo": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "banner": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "validation_term": {
+            "type": "number",
+            "example": 256
+          },
+          "payment_term": {
+            "type": "number",
+            "example": 85
+          },
+          "currency": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "endpoint": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "terms": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "guidelines": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "info": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "sellers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Seller",
+              "example": null
+            }
+          },
+          "platform_offers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlatformOffer",
+              "example": null
+            }
+          },
+          "primary_platform_offer": {
+            "$ref": "#/components/schemas/PlatformOffer",
+            "example": null
+          }
+        },
+        "description": "Platform (Model)"
+      },
+      "PlatformOffer": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 884
+          },
+          "platform_id": {
+            "type": "number",
+            "example": 608
+          },
+          "offer_id": {
+            "type": "number",
+            "example": 183
+          },
+          "merchant_id": {
+            "type": "number",
+            "example": 491
+          },
+          "is_primary": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Record<string, any>",
+            "example": null
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "platform": {
+            "$ref": "#/components/schemas/Platform",
+            "example": null
+          }
+        },
+        "description": "PlatformOffer (Model)"
+      },
+      "Postback": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 991
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "url": {
+            "type": "string",
+            "example": "https://example.com"
+          },
+          "method": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "headers": {
+            "$ref": "#/components/schemas/object",
+            "example": null
+          },
+          "body": {
+            "$ref": "#/components/schemas/object",
+            "example": null
+          },
+          "remarks": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2021-03-23T16:13:08.489+01:00"
+          },
+          "postback_logs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostbackLog",
+              "example": null
+            }
+          }
+        },
+        "description": "Postback (Model)"
+      },
+      "PostbackLog": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 908
+          },
+          "postback_id": {
+            "type": "number",
+            "example": 217
+          },
+          "url": {
+            "type": "string",
+            "example": "https://example.com"
+          },
+          "method": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "headers": {
+            "$ref": "#/components/schemas/object",
+            "example": null
+          },
+          "body": {
+            "$ref": "#/components/schemas/object",
+            "example": null
+          },
+          "status_code": {
+            "type": "number",
+            "example": 479
+          },
+          "response": {
+            "$ref": "#/components/schemas/object",
+            "example": null
+          },
+          "remarks": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "postback": {
+            "$ref": "#/components/schemas/Postback",
+            "example": null
+          }
+        },
+        "description": "PostbackLog (Model)"
+      },
+      "Product": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 651
+          },
+          "seller_id": {
+            "type": "number",
+            "example": 877
+          },
+          "platform_item_id": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "currency": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "price_min": {
+            "type": "number",
+            "example": 355
+          },
+          "price_max": {
+            "type": "number",
+            "example": 76
+          },
+          "discount_rate": {
+            "type": "number",
+            "example": 85
+          },
+          "category_id": {
+            "type": "number",
+            "example": 858
+          },
+          "category_tree": {
+            "$ref": "#/components/schemas/Record<number, number>",
+            "example": null
+          },
+          "url": {
+            "type": "string",
+            "example": "https://example.com"
+          },
+          "image_url": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "rating": {
+            "type": "number",
+            "example": 500
+          },
+          "platform_commission_rate": {
+            "type": "number",
+            "example": 258
+          },
+          "seller_commission_rate": {
+            "type": "number",
+            "example": 31
+          },
+          "sales": {
+            "type": "number",
+            "example": 764
+          },
+          "product_cat_ids": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "example": 509
+            }
+          },
+          "clicks": {
+            "type": "number",
+            "example": 438
+          },
+          "active": {
+            "type": "boolean",
+            "example": true
+          },
+          "featured": {
+            "type": "boolean",
+            "example": true
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "seller": {
+            "$ref": "#/components/schemas/Seller",
+            "example": null
+          },
+          "product_clicks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductClick",
+              "example": null
+            }
+          },
+          "referral_programs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReferralProgram",
+              "example": null
+            }
+          }
+        },
+        "description": "Product (Model)"
+      },
+      "ProductCategory": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 870
+          },
+          "category_name": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "category_id": {
+            "type": "number",
+            "example": 472
+          },
+          "path": {
+            "$ref": "#/components/schemas/string // JSON representation of the full hierarchy",
+            "example": null
+          },
+          "category_level": {
+            "$ref": "#/components/schemas/number // Virtual column to store the category level based on the path length",
+            "example": null
+          },
+          "image_urls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "Lorem Ipsum"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Product",
+              "example": null
+            }
+          }
+        },
+        "description": "ProductCategory (Model)"
+      },
+      "ProductClick": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 645
+          },
+          "product_id": {
+            "type": "number",
+            "example": 633
+          },
+          "user_id": {
+            "type": "number",
+            "example": 646
+          },
+          "affiliate_link": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "ip_address": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "clicks_count": {
+            "type": "number",
+            "example": 967
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "product": {
+            "$ref": "#/components/schemas/Product",
+            "example": null
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": null
+          }
+        },
+        "description": "ProductClick (Model)"
+      },
+      "RawConversion": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 375
+          },
+          "conversion_id": {
+            "type": "number",
+            "example": 997
+          },
+          "raw_data": {
+            "$ref": "#/components/schemas/InvolveAsiaConversionData",
+            "example": null
+          },
+          "remarks": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "processed_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "RawConversion (Model)"
+      },
+      "ReferralProgram": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 261
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "description": {
+            "type": "string",
+            "example": "Lorem ipsum dolor sit amet"
+          },
+          "app_rate": {
+            "type": "number",
+            "example": 694
+          },
+          "user_rate": {
+            "type": "number",
+            "example": 956
+          },
+          "referral_rate": {
+            "type": "number",
+            "example": 708
+          },
+          "config": {
+            "$ref": "#/components/schemas/Record<string, any>",
+            "example": null
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Product",
+              "example": null
+            }
+          }
+        },
+        "description": "ReferralProgram (Model)"
+      },
+      "RefreshToken": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "access_token_id": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "revoked": {
+            "type": "boolean",
+            "example": true
+          },
+          "expires_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "access_token": {
+            "$ref": "#/components/schemas/AccessToken",
+            "example": null
+          }
+        },
+        "description": "RefreshToken (Model)"
+      },
+      "Reward": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 472
+          },
+          "user_id": {
+            "type": "number",
+            "example": 727
+          },
+          "module": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "currency": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "amount": {
+            "type": "number",
+            "example": 853
+          },
+          "withdrawal_id": {
+            "type": "number",
+            "example": 772
+          },
+          "status_id": {
+            "type": "number",
+            "example": 188
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/object",
+            "example": null
+          },
+          "remarks": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": null
+          },
+          "withdrawal": {
+            "$ref": "#/components/schemas/Withdrawal",
+            "example": null
+          },
+          "status": {
+            "$ref": "#/components/schemas/MasterLookup",
+            "example": null
+          }
+        },
+        "description": "Reward (Model)"
+      },
+      "Seller": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 135
+          },
+          "platform_id": {
+            "type": "number",
+            "example": 612
+          },
+          "platform_seller_id": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "image_url": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "banner_url": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "commission_rate": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "rating": {
+            "type": "number",
+            "example": 316
+          },
+          "is_active": {
+            "type": "boolean",
+            "example": true
+          },
+          "is_featured": {
+            "type": "boolean",
+            "example": true
+          },
+          "active_product_count": {
+            "type": "number",
+            "example": 873
+          },
+          "last_synced_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "platform": {
+            "$ref": "#/components/schemas/Platform",
+            "example": null
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Product",
+              "example": null
+            }
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Category",
+              "example": null
+            }
+          }
+        },
+        "description": "Seller (Model)"
+      },
+      "Setting": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "key": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "value": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "Setting (Model)"
+      },
+      "SocialAccount": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 784
+          },
+          "provider_name": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "user_id": {
+            "type": "number",
+            "example": 237
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": null
+          }
+        },
+        "description": "SocialAccount (Model)"
+      },
+      "TrackingLink": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 809
+          },
+          "click_id": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "product_id": {
+            "type": "number",
+            "example": 717
+          },
+          "user_id": {
+            "type": "number",
+            "example": 568
+          },
+          "tracking_link": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "ip_address": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "user_agent": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/object",
+            "example": null
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "conversions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Conversion",
+              "example": null
+            }
+          },
+          "product": {
+            "$ref": "#/components/schemas/Product",
+            "example": null
+          },
+          "missing_cashback": {
+            "$ref": "#/components/schemas/MissingCashback",
+            "example": null
+          }
+        },
+        "description": "TrackingLink (Model)"
+      },
+      "User": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 204
+          },
+          "unique_id": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "johndoe@example.com",
+            "format": "email"
+          },
+          "is_admin": {
+            "type": "boolean",
+            "example": true
+          },
+          "avatar": {
+            "type": "string",
+            "example": "https://example.com/avatar.png"
+          },
+          "api_key": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "referral_code": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "source": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "notification": {
+            "type": "boolean",
+            "example": true
+          },
+          "last_login_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "social_account": {
+            "$ref": "#/components/schemas/SocialAccount",
+            "example": null
+          },
+          "social_accounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SocialAccount",
+              "example": null
+            }
+          },
+          "device_tokens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeviceToken",
+              "example": null
+            }
+          },
+          "user_bank_account": {
+            "$ref": "#/components/schemas/UserBankAccount",
+            "example": null
+          },
+          "product_clicks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductClick",
+              "example": null
+            }
+          },
+          "user_referral": {
+            "$ref": "#/components/schemas/UserReferral",
+            "example": null
+          },
+          "downline_users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserReferral",
+              "example": null
+            }
+          }
+        },
+        "description": "User (Model)"
+      },
+      "UserBankAccount": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 436
+          },
+          "user_id": {
+            "type": "number",
+            "example": 286
+          },
+          "bank_id": {
+            "type": "number",
+            "example": 816
+          },
+          "payment_method_id": {
+            "type": "number",
+            "example": 947
+          },
+          "email": {
+            "type": "string",
+            "example": "johndoe@example.com",
+            "format": "email"
+          },
+          "account_holder_name": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "account_number": {
+            "$ref": "#/components/schemas/string // Consider encryption for this field",
+            "example": null
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": null
+          },
+          "bank": {
+            "$ref": "#/components/schemas/Bank",
+            "example": null
+          },
+          "payment_method": {
+            "$ref": "#/components/schemas/MasterLookup",
+            "example": null
+          }
+        },
+        "description": "UserBankAccount (Model)"
+      },
+      "UserReferral": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 152
+          },
+          "referral_program_id": {
+            "type": "number",
+            "example": 806
+          },
+          "user_id": {
+            "type": "number",
+            "example": 281
+          },
+          "upline_user_id": {
+            "type": "number",
+            "example": 794
+          },
+          "converted_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": null
+          },
+          "upline_user": {
+            "$ref": "#/components/schemas/User",
+            "example": null
+          },
+          "referral_program": {
+            "$ref": "#/components/schemas/ReferralProgram",
+            "example": null
+          }
+        },
+        "description": "UserReferral (Model)"
+      },
+      "UserTag": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 460
+          },
+          "user_id": {
+            "type": "number",
+            "example": 977
+          },
+          "tag": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "remarks": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "deleted_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": null
+          }
+        },
+        "description": "UserTag (Model)"
+      },
+      "Withdrawal": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 313
+          },
+          "withdrawal_id": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "user_id": {
+            "type": "number",
+            "example": 678
+          },
+          "amount": {
+            "type": "number",
+            "example": 635
+          },
+          "status_id": {
+            "type": "number",
+            "example": 556
+          },
+          "action_reason_id": {
+            "type": "number",
+            "example": 844
+          },
+          "bank_id": {
+            "type": "number",
+            "example": 926
+          },
+          "payment_method_id": {
+            "type": "number",
+            "example": 121
+          },
+          "email": {
+            "type": "string",
+            "example": "johndoe@example.com",
+            "format": "email"
+          },
+          "account_holder_name": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "account_number": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "remarks": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": null
+          },
+          "bank": {
+            "$ref": "#/components/schemas/Bank",
+            "example": null
+          },
+          "conversions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Conversion",
+              "example": null
+            }
+          },
+          "status": {
+            "$ref": "#/components/schemas/MasterLookup",
+            "example": null
+          },
+          "action_reason": {
+            "$ref": "#/components/schemas/ActionReason",
+            "example": null
+          },
+          "payment_method": {
+            "$ref": "#/components/schemas/MasterLookup",
+            "example": null
+          }
+        },
+        "description": "Withdrawal (Model)"
+      },
+      "updateAccountValidator": {
+        "type": "object",
+        "properties": {
+          "notification": {
+            "type": "boolean",
+            "example": true
+          }
+        },
+        "example": {
+          "notification": true
+        },
+        "description": "updateAccountValidator (Validator)"
+      },
+      "oauthAuthorizeValidator": {
+        "type": "object",
+        "properties": {
+          "client_id": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "required": true,
+            "minLength": 6
+          },
+          "redirect_uri": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "required": true
+          },
+          "response_type": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "choices": [
+              "code"
+            ],
+            "required": true
+          },
+          "scope": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "state": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "required": true
+          },
+          "code_challenge": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "required": true
+          },
+          "code_challenge_method": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "choices": [
+              "plain",
+              "S256"
+            ],
+            "required": true
+          }
+        },
+        "example": {
+          "client_id": "Lorem Ipsum",
+          "redirect_uri": "Lorem Ipsum",
+          "response_type": "Lorem Ipsum",
+          "scope": "Lorem Ipsum",
+          "state": "Lorem Ipsum",
+          "code_challenge": "Lorem Ipsum",
+          "code_challenge_method": "Lorem Ipsum"
+        },
+        "description": "oauthAuthorizeValidator (Validator)"
+      },
+      "bankAccountValidator": {
+        "type": "object",
+        "properties": {
+          "bankId": {
+            "type": "number",
+            "example": 932,
+            "required": true
+          },
+          "accountHolderName": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "required": true,
+            "maxLength": 255
+          },
+          "accountNumber": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "required": true,
+            "maxLength": 50
+          }
+        },
+        "example": {
+          "bankId": 932,
+          "accountHolderName": "Lorem Ipsum",
+          "accountNumber": "Lorem Ipsum"
+        },
+        "description": "bankAccountValidator (Validator)"
+      },
+      "clientUserIndexValidator": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "name": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "referralCode": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "page": {
+            "type": "number",
+            "example": 74
+          },
+          "limit": {
+            "type": "number",
+            "example": 795
+          }
+        },
+        "example": {
+          "email": "Lorem Ipsum",
+          "name": "Lorem Ipsum",
+          "referralCode": "Lorem Ipsum",
+          "page": 74,
+          "limit": 795
+        },
+        "description": "clientUserIndexValidator (Validator)"
+      },
+      "feedbackValidator": {
+        "type": "object",
+        "properties": {
+          "userAgent": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "required": true,
+            "minLength": 1
+          },
+          "feedbackText": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "required": true,
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "feedbackType": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "required": true,
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "email": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          }
+        },
+        "example": {
+          "userAgent": "Lorem Ipsum",
+          "feedbackText": "Lorem Ipsum",
+          "feedbackType": "Lorem Ipsum",
+          "email": "Lorem Ipsum"
+        },
+        "description": "feedbackValidator (Validator)"
+      },
+      "storeMissingCashbackValidator": {
+        "type": "object",
+        "properties": {
+          "clickId": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "required": true
+          },
+          "orderId": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "required": true
+          },
+          "email": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          }
+        },
+        "example": {
+          "clickId": "Lorem Ipsum",
+          "orderId": "Lorem Ipsum",
+          "email": "Lorem Ipsum"
+        },
+        "description": "storeMissingCashbackValidator (Validator)"
+      },
+      "notificationIndexValidator": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "number",
+            "example": 797,
+            "required": true
+          },
+          "limit": {
+            "type": "number",
+            "example": 666,
+            "required": true
+          }
+        },
+        "example": {
+          "page": 797,
+          "limit": 666
+        },
+        "description": "notificationIndexValidator (Validator)"
+      },
+      "activityHistoryValidator": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "number",
+            "example": 975,
+            "required": true
+          },
+          "limit": {
+            "type": "number",
+            "example": 217,
+            "required": true
+          }
+        },
+        "example": {
+          "page": 975,
+          "limit": 217
+        },
+        "description": "activityHistoryValidator (Validator)"
+      },
+      "productIndexValidator": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "type": {
+            "type": "number",
+            "example": 595,
+            "choices": [
+              "all",
+              "community"
+            ]
+          },
+          "sellerId": {
+            "type": "number",
+            "example": 862
+          },
+          "featured": {
+            "type": "boolean",
+            "example": true
+          },
+          "sort": {
+            "type": "number",
+            "example": 206,
+            "choices": [
+              "sales",
+              "created_at",
+              "commission",
+              "price"
+            ]
+          },
+          "order": {
+            "type": "number",
+            "example": 796,
+            "choices": [
+              "asc",
+              "desc"
+            ]
+          },
+          "page": {
+            "type": "number",
+            "example": 9,
+            "required": true
+          },
+          "limit": {
+            "type": "number",
+            "example": 147,
+            "required": true
+          },
+          "random": {
+            "type": "number",
+            "example": 58
+          },
+          "pCategoryId": {
+            "type": "number",
+            "example": 946
+          }
+        },
+        "example": {
+          "search": "Lorem Ipsum",
+          "type": 595,
+          "sellerId": 862,
+          "featured": true,
+          "sort": 206,
+          "order": 796,
+          "page": 9,
+          "limit": 147,
+          "random": 58,
+          "pCategoryId": 946
+        },
+        "description": "productIndexValidator (Validator)"
+      },
+      "productUrlValidator": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 394
+          },
+          "url": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "minLength": 1
+          }
+        },
+        "example": {
+          "id": 394,
+          "url": "Lorem Ipsum"
+        },
+        "description": "productUrlValidator (Validator)"
+      },
+      "productCategoryGetSubcategoriesValidator": {
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "number",
+            "example": 614,
+            "required": true
+          }
+        },
+        "example": {
+          "categoryId": 614
+        },
+        "description": "productCategoryGetSubcategoriesValidator (Validator)"
+      },
+      "productCategoryIndexValidator": {
+        "type": "object",
+        "properties": {
+          "categoryLevel": {
+            "type": "number",
+            "example": 2
+          },
+          "search": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "sort": {
+            "type": "number",
+            "example": 391,
+            "choices": [
+              "categoryName"
+            ]
+          },
+          "order": {
+            "type": "number",
+            "example": 947,
+            "choices": [
+              "asc",
+              "desc"
+            ]
+          },
+          "page": {
+            "type": "number",
+            "example": 881,
+            "required": true
+          },
+          "limit": {
+            "type": "number",
+            "example": 765,
+            "required": true
+          },
+          "random": {
+            "type": "number",
+            "example": 337
+          }
+        },
+        "example": {
+          "categoryLevel": 2,
+          "search": "Lorem Ipsum",
+          "sort": 391,
+          "order": 947,
+          "page": 881,
+          "limit": 765,
+          "random": 337
+        },
+        "description": "productCategoryIndexValidator (Validator)"
+      },
+      "sellerIndexValidator": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "filter": {
+            "type": "object",
+            "properties": {
+              "ratingRange": {
+                "type": "number",
+                "example": 209,
+                "choices": [
+                  "0",
+                  ">1",
+                  ">2",
+                  ">3",
+                  ">4",
+                  "5"
+                ]
+              },
+              "commissionRange": {
+                "type": "object",
+                "properties": {
+                  "min": {
+                    "type": "number",
+                    "example": 963,
+                    "maximum": 1
+                  },
+                  "max": {
+                    "type": "number",
+                    "example": 325,
+                    "maximum": 1
+                  }
+                }
+              }
+            }
+          },
+          "featured": {
+            "type": "boolean",
+            "example": true
+          },
+          "sort": {
+            "type": "number",
+            "example": 396,
+            "choices": [
+              "rating",
+              "commission",
+              "createdAt"
+            ]
+          },
+          "order": {
+            "type": "number",
+            "example": 430,
+            "choices": [
+              "asc",
+              "desc"
+            ]
+          },
+          "page": {
+            "type": "number",
+            "example": 439,
+            "required": true
+          },
+          "limit": {
+            "type": "number",
+            "example": 556,
+            "required": true
+          }
+        },
+        "example": {
+          "search": "Lorem Ipsum",
+          "filter": {
+            "ratingRange": 209,
+            "commissionRange": {
+              "min": 963,
+              "max": 325
+            }
+          },
+          "featured": true,
+          "sort": 396,
+          "order": 430,
+          "page": 439,
+          "limit": 556
+        },
+        "description": "sellerIndexValidator (Validator)"
+      },
+      "generateTrackingLinkValidator": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "number",
+            "example": 454,
+            "required": true
+          }
+        },
+        "example": {
+          "productId": 454
+        },
+        "description": "generateTrackingLinkValidator (Validator)"
+      },
+      "trackingLinkIndexValidator": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "number",
+            "example": 88,
+            "required": true
+          },
+          "limit": {
+            "type": "number",
+            "example": 892,
+            "required": true
+          }
+        },
+        "example": {
+          "page": 88,
+          "limit": 892
+        },
+        "description": "trackingLinkIndexValidator (Validator)"
+      },
+      "webhookConversionValidator": {
+        "type": "object",
+        "properties": {
+          "conversion_id": {
+            "type": "number",
+            "example": 758,
+            "required": true
+          }
+        },
+        "example": {
+          "conversion_id": 758
+        },
+        "description": "webhookConversionValidator (Validator)"
+      },
+      "webhookConversionValidatorOld": {
+        "type": "object",
+        "properties": {
+          "conversion_id": {
+            "type": "number",
+            "example": 543,
+            "required": true
+          },
+          "datetime_conversion": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "required": true
+          },
+          "offer_id": {
+            "type": "number",
+            "example": 122,
+            "required": true
+          },
+          "offer_name": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "sale_amount": {
+            "type": "number",
+            "example": 458,
+            "required": true
+          },
+          "revenue": {
+            "type": "number",
+            "example": 231,
+            "required": true
+          },
+          "payout": {
+            "type": "number",
+            "example": 751,
+            "required": true
+          },
+          "base_payout": {
+            "type": "number",
+            "example": 862,
+            "required": true
+          },
+          "bonus_payout": {
+            "type": "number",
+            "example": 708,
+            "required": true
+          },
+          "adv_sub1": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "adv_sub2": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "adv_sub3": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "adv_sub4": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "adv_sub5": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "adv_sub6": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "adv_sub7": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "adv_sub8": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "adv_sub9": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "adv_sub10": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "aff_sub1": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "aff_sub2": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "aff_sub3": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "aff_sub4": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "aff_sub5": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "conversion_status": {
+            "type": "number",
+            "example": 790,
+            "choices": [
+              "pending",
+              "approved",
+              "rejected",
+              "paid",
+              "yet to consume"
+            ],
+            "required": true
+          },
+          "affiliate_remarks": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          }
+        },
+        "example": {
+          "conversion_id": 543,
+          "datetime_conversion": "Lorem Ipsum",
+          "offer_id": 122,
+          "offer_name": "Lorem Ipsum",
+          "sale_amount": 458,
+          "revenue": 231,
+          "payout": 751,
+          "base_payout": 862,
+          "bonus_payout": 708,
+          "adv_sub1": "Lorem Ipsum",
+          "adv_sub2": "Lorem Ipsum",
+          "adv_sub3": "Lorem Ipsum",
+          "adv_sub4": "Lorem Ipsum",
+          "adv_sub5": "Lorem Ipsum",
+          "adv_sub6": "Lorem Ipsum",
+          "adv_sub7": "Lorem Ipsum",
+          "adv_sub8": "Lorem Ipsum",
+          "adv_sub9": "Lorem Ipsum",
+          "adv_sub10": "Lorem Ipsum",
+          "aff_sub1": "Lorem Ipsum",
+          "aff_sub2": "Lorem Ipsum",
+          "aff_sub3": "Lorem Ipsum",
+          "aff_sub4": "Lorem Ipsum",
+          "aff_sub5": "Lorem Ipsum",
+          "conversion_status": 790,
+          "affiliate_remarks": "Lorem Ipsum"
+        },
+        "description": "webhookConversionValidatorOld (Validator)"
+      }
+    }
+  },
+  "paths": {
+    "/auth/token": {
+      "post": {
+        "summary": "Get Access / Refresh Token (token)",
+        "description": "https://laravel.com/docs/11.x/passport#code-grant-pkce-converting-authorization-codes-to-access-tokens, https://laravel.com/docs/11.x/passport#refreshing-tokens\n\n _app/controllers/oauth_controller.ts_ - **token**",
+        "operationId": "token",
+        "parameters": [],
+        "tags": [
+          "AUTH"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "access_token": "string",
+                    "token_type": "string",
+                    "expires_in": 3600,
+                    "refresh_token": "string",
+                    "scope": "string"
+                  }
+                },
+                "example": {
+                  "access_token": "string",
+                  "token_type": "string",
+                  "expires_in": 3600,
+                  "refresh_token": "string",
+                  "scope": "string"
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          }
+        },
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              },
+              "example": [
+                {
+                  "grant_type": "authorization_code",
+                  "client_id": "string",
+                  "redirect_uri": "string",
+                  "code_verifier": "string",
+                  "code": "string"
+                },
+                {
+                  "grant_type": "refresh_token",
+                  "client_id": "string",
+                  "refresh_token": "string",
+                  "scope": "string"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/api/account": {
+      "get": {
+        "summary": "Get the account information (show)",
+        "description": "Returns **200** (OK) as **application/json**\n\n _app/controllers/account_controller.ts_ - **show**",
+        "operationId": "getAccount",
+        "parameters": [],
+        "tags": [
+          "ACCOUNT"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "example": {
+                  "id": 204,
+                  "unique_id": "Lorem Ipsum",
+                  "name": "John Doe",
+                  "email": "johndoe@example.com",
+                  "is_admin": true,
+                  "avatar": "https://example.com/avatar.png",
+                  "api_key": "Lorem Ipsum",
+                  "referral_code": "Lorem Ipsum",
+                  "source": "Lorem Ipsum",
+                  "notification": true,
+                  "last_login_at": "2021-03-23T16:13:08.489+01:00",
+                  "created_at": "2021-03-23T16:13:08.489+01:00",
+                  "updated_at": "2021-03-23T16:13:08.489+01:00",
+                  "deleted_at": "2021-03-23T16:13:08.489+01:00"
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**",
+            "headers": {}
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "summary": "Update the account information (update)",
+        "description": "\n\n _app/controllers/account_controller.ts_ - **update**",
+        "operationId": "updateAccount",
+        "parameters": [],
+        "tags": [
+          "ACCOUNT"
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {}
+              }
+            },
+            "description": "Returns **204** (No Content) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "notification": true
+                }
+              },
+              "example": {
+                "notification": true
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete the account (destroy)",
+        "description": "\n\n _app/controllers/account_controller.ts_ - **destroy**",
+        "operationId": "deleteAccount",
+        "parameters": [],
+        "tags": [
+          "ACCOUNT"
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {}
+              }
+            },
+            "description": "Returns **204** (No Content) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/account/bank-details": {
+      "get": {
+        "summary": "Get the authenticated user's bank account details (show)",
+        "description": "Returns **200** (OK) as **application/json**\n\n _app/controllers/user_bank_account_controller.ts_ - **show**",
+        "operationId": "getUserBankAccount",
+        "parameters": [],
+        "tags": [
+          "USER BANK ACCOUNT"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserBankAccount"
+                },
+                "example": {
+                  "id": 436,
+                  "user_id": 286,
+                  "bank_id": 816,
+                  "payment_method_id": 947,
+                  "email": "johndoe@example.com",
+                  "account_holder_name": "Lorem Ipsum",
+                  "account_number": {},
+                  "created_at": "2021-03-23T16:13:08.489+01:00",
+                  "updated_at": "2021-03-23T16:13:08.489+01:00"
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "serverCode": "USER_BANK_ACCOUNT_NOT_FOUND",
+                    "message": "Bank account details not found."
+                  }
+                },
+                "example": {
+                  "serverCode": "USER_BANK_ACCOUNT_NOT_FOUND",
+                  "message": "Bank account details not found."
+                }
+              }
+            },
+            "description": "Returns **404** (Not Found) as **application/json**"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "summary": "Add bank account details for the authenticated user (store)",
+        "description": "Returns **201** (Created) as **application/json**\n\n _app/controllers/user_bank_account_controller.ts_ - **store**",
+        "operationId": "createUserBankAccount",
+        "parameters": [],
+        "tags": [
+          "USER BANK ACCOUNT"
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserBankAccount"
+                },
+                "example": {
+                  "id": 436,
+                  "user_id": 286,
+                  "bank_id": 816,
+                  "payment_method_id": 947,
+                  "email": "johndoe@example.com",
+                  "account_holder_name": "Lorem Ipsum",
+                  "account_number": {},
+                  "created_at": "2021-03-23T16:13:08.489+01:00",
+                  "updated_at": "2021-03-23T16:13:08.489+01:00"
+                }
+              }
+            },
+            "description": "Returns **201** (Created) as **application/json**"
+          },
+          "400": {
+            "content": {
+              "text/plain": {
+                "example": "{\"serverCode\": \"USER_BANK_ACCOUNT_CREATE_CONFLICT\", \"message\": \"User already has bank account details. Use PUT to update.\"} or {\"serverCode\": \"USER_BANK_ACCOUNT_BANK_INACTIVE\", \"message\": \"Selected bank is not active.\"} or {\"serverCode\": \"DEFAULT_PAYMENT_METHOD_NOT_FOUND\", \"message\": \"Default payment method 'bank_transfer' not configured.\"}"
+              }
+            },
+            "description": "Returns **400** (Bad Request) as **text/plain**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          },
+          "422": {
+            "content": {
+              "text/plain": {
+                "example": "Validation errors"
+              }
+            },
+            "description": "Returns **422** (Unprocessable Entity) as **text/plain**"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserBankAccountValidator"
+              },
+              "example": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update the authenticated user's bank account details (update)",
+        "description": "Update the authenticated user\\'s bank account details.\n\n _app/controllers/user_bank_account_controller.ts_ - **update**",
+        "operationId": "updateUserBankAccount",
+        "parameters": [],
+        "tags": [
+          "USER BANK ACCOUNT"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserBankAccount"
+                },
+                "example": {
+                  "id": 436,
+                  "user_id": 286,
+                  "bank_id": 816,
+                  "payment_method_id": 947,
+                  "email": "johndoe@example.com",
+                  "account_holder_name": "Lorem Ipsum",
+                  "account_number": {},
+                  "created_at": "2021-03-23T16:13:08.489+01:00",
+                  "updated_at": "2021-03-23T16:13:08.489+01:00"
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "serverCode": "USER_BANK_ACCOUNT_BANK_INACTIVE",
+                    "message": "Selected bank is not active."
+                  }
+                },
+                "example": {
+                  "serverCode": "USER_BANK_ACCOUNT_BANK_INACTIVE",
+                  "message": "Selected bank is not active."
+                }
+              }
+            },
+            "description": "Returns **400** (Bad Request) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "serverCode": "USER_BANK_ACCOUNT_UPDATE_FORBIDDEN_PENDING_WITHDRAWAL",
+                    "message": "Cannot update bank details while withdrawals are pending."
+                  }
+                },
+                "example": {
+                  "serverCode": "USER_BANK_ACCOUNT_UPDATE_FORBIDDEN_PENDING_WITHDRAWAL",
+                  "message": "Cannot update bank details while withdrawals are pending."
+                }
+              }
+            },
+            "description": "Returns **403** (Forbidden) as **application/json**"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "serverCode": "USER_BANK_ACCOUNT_UPDATE_NOT_FOUND",
+                    "message": "Bank account details not found to update."
+                  }
+                },
+                "example": {
+                  "serverCode": "USER_BANK_ACCOUNT_UPDATE_NOT_FOUND",
+                  "message": "Bank account details not found to update."
+                }
+              }
+            },
+            "description": "Returns **404** (Not Found) as **application/json**"
+          },
+          "422": {
+            "content": {
+              "text/plain": {
+                "example": "Validation errors"
+              }
+            },
+            "description": "Returns **422** (Unprocessable Entity) as **text/plain**"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserBankAccountValidator"
+              },
+              "example": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/device": {
+      "post": {
+        "summary": "Store the device token (store)",
+        "description": "Returns **201** (Created) as **application/json**\n\n _app/controllers/device_token_controller.ts_ - **store**",
+        "operationId": "storeDeviceToken",
+        "parameters": [],
+        "tags": [
+          "DEVICE TOKEN"
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {}
+              }
+            },
+            "description": "Returns **201** (Created) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": "string",
+                  "info": "string"
+                }
+              },
+              "example": {
+                "token": "string",
+                "info": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/device/{token}": {
+      "delete": {
+        "summary": "Destroy the device token (destroy)",
+        "description": "\n\n _app/controllers/device_token_controller.ts_ - **destroy**",
+        "operationId": "destroyDeviceToken",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "token",
+            "description": "Device token",
+            "schema": {
+              "example": "",
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "DEVICE TOKEN"
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "undefined"
+                  }
+                },
+                "example": {}
+              }
+            },
+            "description": "Returns **204** (No Content) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/earnings": {
+      "get": {
+        "summary": "Get the earnings (index)",
+        "description": "Returns **200** (OK) as **application/json**\n\n _app/controllers/earning_controller.ts_ - **index**",
+        "operationId": "getEarnings",
+        "parameters": [],
+        "tags": [
+          "EARNINGS"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "minWithdrawal": 20,
+                    "availableToWithdraw": 80.32,
+                    "totalEarnings": 150.92,
+                    "pendingPayment": 32.43,
+                    "withdrawn": 1239.23,
+                    "currency": "MYR"
+                  }
+                },
+                "example": {
+                  "minWithdrawal": 20,
+                  "availableToWithdraw": 80.32,
+                  "totalEarnings": 150.92,
+                  "pendingPayment": 32.43,
+                  "withdrawn": 1239.23,
+                  "currency": "MYR"
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/transactions": {
+      "get": {
+        "summary": "Get the transactions (index)",
+        "description": "\n\n _app/controllers/transaction_controller.ts_ - **index**",
+        "operationId": "getTransactions",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "number",
+              "example": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "number",
+              "example": 10
+            }
+          }
+        ],
+        "tags": [
+          "TRANSACTIONS"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/transactions/{id}": {
+      "get": {
+        "summary": "Get transaction details (show)",
+        "description": "\n\n _app/controllers/transaction_controller.ts_ - **show**",
+        "operationId": "getTransaction",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "Transaction type",
+            "schema": {
+              "example": "reward",
+              "type": "string",
+              "enum": [
+                "reward",
+                "conversion"
+              ]
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "TRANSACTIONS"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/withdrawals": {
+      "get": {
+        "summary": "Get the withdrawals history (index)",
+        "description": "\n\n _app/controllers/withdrawal_controller.ts_ - **index**",
+        "operationId": "getWithdrawals",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "number",
+              "example": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "number",
+              "example": 10
+            }
+          }
+        ],
+        "tags": [
+          "WITHDRAWALS"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create a withdrawal request (store)",
+        "description": "Returns **201** (Created) as **application/json**\n\n _app/controllers/withdrawal_controller.ts_ - **store**",
+        "operationId": "createWithdrawal",
+        "parameters": [],
+        "tags": [
+          "WITHDRAWALS"
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": "Withdrawal request created successfully"
+                  }
+                },
+                "example": {
+                  "message": "Withdrawal request created successfully"
+                }
+              }
+            },
+            "description": "Returns **201** (Created) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/withdrawals/{id}": {
+      "get": {
+        "summary": "Get withdrawal details (show)",
+        "description": "\n\n _app/controllers/withdrawal_controller.ts_ - **show**",
+        "operationId": "getWithdrawal",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "number",
+              "example": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "number",
+              "example": 10
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "WITHDRAWALS"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/products/{id}/click": {
+      "post": {
+        "summary": "Record a click on a product (click)",
+        "description": "\n\n _app/controllers/product_controller.ts_ - **click**",
+        "operationId": "productClick",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Product ID",
+            "schema": {
+              "example": "",
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "PRODUCTS"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/products/activity-history": {
+      "get": {
+        "summary": "Get a user's product click history (activityHistory)",
+        "description": "\n\n _app/controllers/product_controller.ts_ - **activityHistory**",
+        "operationId": "productActivityHistory",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Page number",
+            "schema": {
+              "example": "",
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Limit per page",
+            "schema": {
+              "example": "",
+              "type": "number"
+            },
+            "required": false
+          }
+        ],
+        "tags": [
+          "PRODUCTS"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete all product click history records for the authenticated user (deleteAllActivityHistory)",
+        "description": "\n\n _app/controllers/product_controller.ts_ - **deleteAllActivityHistory**",
+        "operationId": "productDeleteAllActivityHistory",
+        "parameters": [],
+        "tags": [
+          "PRODUCTS"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/notifications": {
+      "get": {
+        "summary": "Get notifications list (index)",
+        "description": "\n\n _app/controllers/notification_controller.ts_ - **index**",
+        "operationId": "notificationIndex",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Page number",
+            "schema": {
+              "example": "",
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Items per page",
+            "schema": {
+              "example": "",
+              "type": "number"
+            },
+            "required": false
+          }
+        ],
+        "tags": [
+          "NOTIFICATIONS"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Soft delete all notifications for the authenticated user (deleteAll)",
+        "description": "\n\n _app/controllers/notification_controller.ts_ - **deleteAll**",
+        "operationId": "notificationDeleteAll",
+        "parameters": [],
+        "tags": [
+          "NOTIFICATIONS"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/notifications/{id}": {
+      "get": {
+        "summary": "Get notification details (show)",
+        "description": "\n\n _app/controllers/notification_controller.ts_ - **show**",
+        "operationId": "notificationShow",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "NOTIFICATIONS"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Soft delete a notification by ID (delete)",
+        "description": "\n\n _app/controllers/notification_controller.ts_ - **delete**",
+        "operationId": "notificationDelete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "NOTIFICATIONS"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/notifications/{id}/read": {
+      "patch": {
+        "summary": "Mark notification as read (markAsRead)",
+        "description": "\n\n _app/controllers/notification_controller.ts_ - **markAsRead**",
+        "operationId": "notificationMarkAsRead",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "NOTIFICATIONS"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/notifications/read": {
+      "patch": {
+        "summary": "Mark all notifications as read (markAllAsRead)",
+        "description": "\n\n _app/controllers/notification_controller.ts_ - **markAllAsRead**",
+        "operationId": "notificationMarkAllAsRead",
+        "parameters": [],
+        "tags": [
+          "NOTIFICATIONS"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/tracking-link": {
+      "get": {
+        "summary": "Get all tracking links (index)",
+        "description": "Get all tracking links\n\n _app/controllers/tracking_controller.ts_ - **index**",
+        "operationId": "getTrackingLinks",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "number",
+              "example": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "number",
+              "example": 10
+            }
+          }
+        ],
+        "tags": [
+          "TRACKING LINK"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/tracking-link/generate": {
+      "post": {
+        "summary": "Generate a tracking link (generateLink)",
+        "description": "Generate a tracking link for a product click\n\n _app/controllers/tracking_controller.ts_ - **generateLink**",
+        "operationId": "generateTrackingLink",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "productId",
+            "description": "Product ID",
+            "schema": {
+              "example": "",
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "TRACKING LINK"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/missing-cashback": {
+      "post": {
+        "summary": "Report missing cashback (store)",
+        "description": "Report missing cashback\n\n _app/controllers/missing_cashback_controller.ts_ - **store**",
+        "operationId": "storeMissingCashback",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "clickId",
+            "description": "Click ID",
+            "schema": {
+              "example": "",
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "orderId",
+            "description": "Order ID",
+            "schema": {
+              "example": "",
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "email",
+            "description": "User email (optional)",
+            "schema": {
+              "example": "",
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "tags": [
+          "MISSING CASHBACK"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/referral": {
+      "get": {
+        "summary": "Get downline users (index)",
+        "description": "\n\n _app/controllers/referral_controller.ts_ - **index**",
+        "operationId": "getReferral",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "number",
+              "example": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "number",
+              "example": 10
+            }
+          }
+        ],
+        "tags": [
+          "REFERRAL"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "summary": "Store the referral code (store)",
+        "description": "\n\n _app/controllers/referral_controller.ts_ - **store**",
+        "operationId": "storeReferral",
+        "parameters": [],
+        "tags": [
+          "REFERRAL"
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {}
+              }
+            },
+            "description": "Returns **204** (No Content) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "access"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "referralCode": "string"
+                }
+              },
+              "example": {
+                "referralCode": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sellers": {
+      "get": {
+        "summary": "Get sellers list (index)",
+        "description": "\n\n _app/controllers/seller_controller.ts_ - **index**",
+        "operationId": "sellerIndex",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "number",
+              "example": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "number",
+              "example": 10
+            }
+          },
+          {
+            "in": "query",
+            "name": "search",
+            "description": "Search seller name",
+            "schema": {
+              "example": "",
+              "type": "string"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "filter[ratingRange]",
+            "description": "Filter sellers by rating range",
+            "schema": {
+              "example": "",
+              "type": "string"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "filter[commissionRange][min]",
+            "description": "Filter sellers by min commission",
+            "schema": {
+              "example": "",
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "filter[commissionRange][max]",
+            "description": "Filter sellers by max commission",
+            "schema": {
+              "example": "",
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "featured",
+            "description": "Filter by featured sellers",
+            "schema": {
+              "example": "",
+              "type": "boolean"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "description": "Sort by rating or commission",
+            "schema": {
+              "example": "rating",
+              "type": "string",
+              "enum": [
+                "rating",
+                "commission"
+              ]
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "description": "Sort order",
+            "schema": {
+              "example": "asc",
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "required": false
+          }
+        ],
+        "tags": [
+          "SELLERS"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/sellers/homepage": {
+      "get": {
+        "summary": "Get sellers list for homepage (homepage)",
+        "description": "\n\n _app/controllers/seller_controller.ts_ - **homepage**",
+        "operationId": "sellerIndexHomepage",
+        "parameters": [],
+        "tags": [
+          "SELLERS"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/sellers/{id}": {
+      "get": {
+        "summary": "Get seller details (show)",
+        "description": "\n\n _app/controllers/seller_controller.ts_ - **show**",
+        "operationId": "sellerShow",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "SELLERS"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/categories": {
+      "get": {
+        "summary": "Get the category (handle)",
+        "description": "Returns **200** (OK) as **application/json**\n\n _app/controllers/category_controller.ts_ - **handle**",
+        "operationId": "getCategory",
+        "parameters": [],
+        "tags": [
+          "CATEGORY"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "categories": {
+                      "type": "object",
+                      "properties": {
+                        "0": {
+                          "type": "object",
+                          "properties": {
+                            "id": 1,
+                            "name": "Category 1"
+                          }
+                        },
+                        "1": {
+                          "type": "object",
+                          "properties": {
+                            "id": 2,
+                            "name": "Category 2"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "categories": [
+                    {
+                      "id": 1,
+                      "name": "Category 1"
+                    },
+                    {
+                      "id": 2,
+                      "name": "Category 2"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/products": {
+      "get": {
+        "summary": "Get a list of products (index)",
+        "description": "\n\n _app/controllers/product_controller.ts_ - **index**",
+        "operationId": "productIndex",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "number",
+              "example": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "number",
+              "example": 10
+            }
+          },
+          {
+            "in": "query",
+            "name": "search",
+            "description": "Search query",
+            "schema": {
+              "example": "",
+              "type": "string"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "Product type",
+            "schema": {
+              "example": "all",
+              "type": "string",
+              "enum": [
+                "all",
+                "community"
+              ]
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "sellerId",
+            "description": "Seller ID",
+            "schema": {
+              "example": "",
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "featured",
+            "description": "Filter by featured sellers",
+            "schema": {
+              "example": "",
+              "type": "boolean"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "description": "Sort by",
+            "schema": {
+              "example": "sales",
+              "type": "string",
+              "enum": [
+                "sales",
+                "commission",
+                "price",
+                "created_at"
+              ]
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "description": "Sort order",
+            "schema": {
+              "example": "asc",
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "random",
+            "description": "Randomize results",
+            "schema": {
+              "example": "",
+              "type": "boolean"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "pCategoryId",
+            "description": "Product category ID",
+            "schema": {
+              "example": "",
+              "type": "number"
+            },
+            "required": false
+          }
+        ],
+        "tags": [
+          "PRODUCTS"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/products/detail": {
+      "get": {
+        "summary": "Search for a product (detail)",
+        "description": "\n\n _app/controllers/product_controller.ts_ - **detail**",
+        "operationId": "productSearch",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "description": "Product ID (required if url is not present)",
+            "schema": {
+              "example": "",
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "url",
+            "description": "Product URL (required if id is not present)",
+            "schema": {
+              "example": "",
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "tags": [
+          "PRODUCTS"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/product-categories": {
+      "get": {
+        "summary": "Get a list of product categories (index)",
+        "description": "\n\n _app/controllers/product_category_controller.ts_ - **index**",
+        "operationId": "productCategoryIndex",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "categoryLevel",
+            "description": "Filter by category level",
+            "schema": {
+              "example": "",
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "search",
+            "description": "Search for categories by name",
+            "schema": {
+              "example": "",
+              "type": "string"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Number of results per page",
+            "schema": {
+              "example": "",
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Page number for pagination",
+            "schema": {
+              "example": "",
+              "type": "number"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "random",
+            "description": "Random seed for ordering",
+            "schema": {
+              "example": "",
+              "type": "number"
+            },
+            "required": false
+          }
+        ],
+        "tags": [
+          "PRODUCT CATEGORIES"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/product-categories/hierarchy": {
+      "get": {
+        "summary": " (hierarchy)",
+        "description": "\n\n _app/controllers/product_category_controller.ts_ - **hierarchy**",
+        "parameters": [],
+        "tags": [
+          "API"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/product-categories/subcategories": {
+      "get": {
+        "summary": " (subcategories)",
+        "description": "\n\n _app/controllers/product_category_controller.ts_ - **subcategories**",
+        "parameters": [],
+        "tags": [
+          "API"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/feedback": {
+      "post": {
+        "summary": "Store feedback (handle)",
+        "description": "\n\n _app/controllers/feedback_controller.ts_ - **handle**",
+        "operationId": "feedbackStore",
+        "parameters": [],
+        "tags": [
+          "FEEDBACK"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userAgent": "string",
+                  "feedbackText": "string",
+                  "feedbackType": "string",
+                  "email": "string|null"
+                }
+              },
+              "example": {
+                "userAgent": "string",
+                "feedbackText": "string",
+                "feedbackType": "string",
+                "email": "string|null"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/misc/banks": {
+      "get": {
+        "summary": "Get a list of api (index)",
+        "description": "Returns **200** (OK) as **text/plain**\n\n _app/controllers/bank_controller.ts_ - **index**",
+        "parameters": [],
+        "tags": [
+          "API"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "text/plain": {
+                "example": "{\"data\": [*{\"id\": \"number\", \"bank_name\": \"string\", \"logo_url\": \"string\"}] }"
+              }
+            },
+            "description": "Returns **200** (OK) as **text/plain**"
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/client/users": {
+      "get": {
+        "summary": "Get all client users (index)",
+        "description": "\n\n _app/controllers/client_user_controller.ts_ - **index**",
+        "operationId": "getClientUsers",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "number",
+              "example": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "number",
+              "example": 10
+            }
+          },
+          {
+            "in": "query",
+            "name": "email",
+            "description": "Email",
+            "schema": {
+              "example": "",
+              "type": "string"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "description": "Name",
+            "schema": {
+              "example": "",
+              "type": "string"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "referralCode",
+            "description": "Referral Code",
+            "schema": {
+              "example": "",
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "tags": [
+          "CLIENT USERS"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AUTH",
+      "description": "Everything related to AUTH"
+    },
+    {
+      "name": "AUTH",
+      "description": "Everything related to AUTH"
+    },
+    {
+      "name": "API",
+      "description": "Everything related to API"
+    },
+    {
+      "name": "ACCOUNT",
+      "description": "Everything related to ACCOUNT"
+    },
+    {
+      "name": "ACCOUNT",
+      "description": "Everything related to ACCOUNT"
+    },
+    {
+      "name": "ACCOUNT",
+      "description": "Everything related to ACCOUNT"
+    },
+    {
+      "name": "USER BANK ACCOUNT",
+      "description": "Everything related to USER BANK ACCOUNT"
+    },
+    {
+      "name": "USER BANK ACCOUNT",
+      "description": "Everything related to USER BANK ACCOUNT"
+    },
+    {
+      "name": "USER BANK ACCOUNT",
+      "description": "Everything related to USER BANK ACCOUNT"
+    },
+    {
+      "name": "DEVICE TOKEN",
+      "description": "Everything related to DEVICE TOKEN"
+    },
+    {
+      "name": "DEVICE TOKEN",
+      "description": "Everything related to DEVICE TOKEN"
+    },
+    {
+      "name": "EARNINGS",
+      "description": "Everything related to EARNINGS"
+    },
+    {
+      "name": "TRANSACTIONS",
+      "description": "Everything related to TRANSACTIONS"
+    },
+    {
+      "name": "TRANSACTIONS",
+      "description": "Everything related to TRANSACTIONS"
+    },
+    {
+      "name": "WITHDRAWALS",
+      "description": "Everything related to WITHDRAWALS"
+    },
+    {
+      "name": "WITHDRAWALS",
+      "description": "Everything related to WITHDRAWALS"
+    },
+    {
+      "name": "WITHDRAWALS",
+      "description": "Everything related to WITHDRAWALS"
+    },
+    {
+      "name": "PRODUCTS",
+      "description": "Everything related to PRODUCTS"
+    },
+    {
+      "name": "PRODUCTS",
+      "description": "Everything related to PRODUCTS"
+    },
+    {
+      "name": "PRODUCTS",
+      "description": "Everything related to PRODUCTS"
+    },
+    {
+      "name": "NOTIFICATIONS",
+      "description": "Everything related to NOTIFICATIONS"
+    },
+    {
+      "name": "NOTIFICATIONS",
+      "description": "Everything related to NOTIFICATIONS"
+    },
+    {
+      "name": "NOTIFICATIONS",
+      "description": "Everything related to NOTIFICATIONS"
+    },
+    {
+      "name": "NOTIFICATIONS",
+      "description": "Everything related to NOTIFICATIONS"
+    },
+    {
+      "name": "NOTIFICATIONS",
+      "description": "Everything related to NOTIFICATIONS"
+    },
+    {
+      "name": "NOTIFICATIONS",
+      "description": "Everything related to NOTIFICATIONS"
+    },
+    {
+      "name": "TRACKING LINK",
+      "description": "Everything related to TRACKING LINK"
+    },
+    {
+      "name": "TRACKING LINK",
+      "description": "Everything related to TRACKING LINK"
+    },
+    {
+      "name": "MISSING CASHBACK",
+      "description": "Everything related to MISSING CASHBACK"
+    },
+    {
+      "name": "REFERRAL",
+      "description": "Everything related to REFERRAL"
+    },
+    {
+      "name": "REFERRAL",
+      "description": "Everything related to REFERRAL"
+    },
+    {
+      "name": "SELLERS",
+      "description": "Everything related to SELLERS"
+    },
+    {
+      "name": "SELLERS",
+      "description": "Everything related to SELLERS"
+    },
+    {
+      "name": "SELLERS",
+      "description": "Everything related to SELLERS"
+    },
+    {
+      "name": "CATEGORY",
+      "description": "Everything related to CATEGORY"
+    },
+    {
+      "name": "PRODUCTS",
+      "description": "Everything related to PRODUCTS"
+    },
+    {
+      "name": "PRODUCTS",
+      "description": "Everything related to PRODUCTS"
+    },
+    {
+      "name": "PRODUCT CATEGORIES",
+      "description": "Everything related to PRODUCT CATEGORIES"
+    },
+    {
+      "name": "FEEDBACK",
+      "description": "Everything related to FEEDBACK"
+    },
+    {
+      "name": "CLIENT USERS",
+      "description": "Everything related to CLIENT USERS"
+    }
+  ]
+}

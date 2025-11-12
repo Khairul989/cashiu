@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('inertia/assets/favicon.svg') }}">
+
+    <title inertia>
+      Cashiu!
+    </title>
+
+    <link href='https://fonts.googleapis.com/css?family=Noto Sans' rel='stylesheet' />
+    <link href='https://fonts.googleapis.com/css?family=Readex Pro' rel='stylesheet' />
+
+    <!-- Add Multiselect CSS. Can be added as a static asset or inside a component. -->
+    <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+
+    <!-- Prevent dark mode flash by setting theme before page renders -->
+    <script>
+      (function() {
+        try {
+          // Check localStorage first
+          const savedTheme = localStorage.getItem('theme')
+          if (savedTheme && ['light', 'dark'].includes(savedTheme)) {
+            if (savedTheme === 'dark') {
+              document.documentElement.classList.add('dark')
+            }
+          } else {
+            // Check system preference
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+              document.documentElement.classList.add('dark')
+            }
+          }
+        } catch (e) {
+          // Fallback to system preference if localStorage fails
+          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark')
+          }
+        }
+      })()
+    </script>
+
+    @vite(['inertia/app/app.ts', `inertia/pages/${page.component}.vue`])
+    @inertiaHead()
+  </head>
+
+  <body class="min-h-screen w-full font-sans">
+    @inertia()
+  </body>
+
+</html>

@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap');
+@import url('vue-multiselect/dist/vue-multiselect.min.css');
+@import url('vue3-toastify/dist/index.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color: #202939;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: #fff;
+}
+
+/* Dark mode styles */
+.dark body {
+  background: #111827;
+  color: #f3f4f6;
+}
+
+/* Ensure html element also gets dark background to prevent flash */
+.dark html {
+  background: #111827;
+}
+
+.dark html {
+  color: #f3f4f6;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #374151;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6b7280;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #374151;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #6b7280;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+.multiselect__option--highlight {
+  @apply bg-primary-600 dark:bg-primary-200 text-gray-100 dark:text-gray-100;
+}
+
+/* in your app.scss of laravel */
+.multiselect .multiselect__tags {
+  @apply dark:bg-gray-900 dark:border-gray-700 dark:text-gray-300;
+}
+
+.multiselect .multiselect__tags .multiselect__single {
+  @apply dark:bg-gray-900;
+}
+
+.multiselect .multiselect__input {
+  @apply dark:bg-gray-900;
+}
+
+.multiselect .multiselect__content-wrapper {
+  @apply dark:bg-gray-900 dark:text-gray-300 dark:border-gray-800;
+}
+
+.multiselect .multiselect__option--selected {
+  @apply dark:bg-gray-700 dark:text-gray-300;
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}

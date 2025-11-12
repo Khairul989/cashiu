@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Withdrawal Status Update</title>
+  <style>
+    body {
+      font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #202939;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 20px;
+    }
+    .email-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .email-header {
+      background-color: #043c9f;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+    .email-header h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 600;
+    }
+    .email-content {
+      padding: 30px 20px;
+    }
+    .greeting {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #043c9f;
+      margin: 25px 0 15px 0;
+      border-bottom: 2px solid #e3e8ef;
+      padding-bottom: 8px;
+    }
+    .details-list {
+      background-color: #f8fafc;
+      border-radius: 6px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .details-list ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .details-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #e3e8ef;
+    }
+    .details-list li:last-child {
+      border-bottom: none;
+    }
+    .details-list strong {
+      color: #043c9f;
+      font-weight: 600;
+    }
+    .status-message {
+      background-color: #eff8ff;
+      border-left: 4px solid #043c9f;
+      padding: 15px 20px;
+      margin: 20px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .status-message.completed {
+      background-color: #ecfdf3;
+      border-left-color: #12b669;
+    }
+    .status-message.processing {
+      background-color: #fff7e6;
+      border-left-color: #ffab00;
+    }
+    .status-message.rejected {
+      background-color: #fef3f2;
+      border-left-color: #f04437;
+    }
+    .support-section {
+      background-color: #f8fafc;
+      border-radius: 6px;
+      padding: 20px;
+      margin: 25px 0;
+      text-align: center;
+    }
+    .support-section a {
+      color: #043c9f;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .support-section a:hover {
+      text-decoration: underline;
+    }
+    .footer {
+      background-color: #f8fafc;
+      padding: 15px 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #697586;
+      border-top: 1px solid #e3e8ef;
+    }
+    .footer em {
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="email-header">
+      <h1>Withdrawal Status Update</h1>
+    </div>
+    
+    <div class="email-content">
+      <div class="greeting">
+        Hi {{ withdrawal.user.name || 'there' }},
+      </div>
+
+      <p>
+        We're writing to inform you about the status of your recent withdrawal request made on {{ withdrawal.createdAt.toFormat('dd/MM/yyyy HH:mm') }}.
+      </p>
+
+      <div class="section-title">Withdrawal Details</div>
+
+      <div class="details-list">
+        <ul>
+          <li>
+            <strong>Withdrawal ID:</strong> {{ withdrawal.withdrawalId }}
+          </li>
+          <li>
+            <strong>Amount:</strong> RM{{ withdrawal.amount }}
+          </li>
+          <li>
+            <strong>Bank Name:</strong> {{ withdrawal.bank.bankName }}
+          </li>
+          <li>
+            <strong>Account Number:</strong> ****{{ bankAccountLastFour }}
+          </li>
+          <li>
+            <strong>Account Holder Name:</strong> {{ withdrawal.accountHolderName }}
+          </li>
+          <li>
+            <strong>Registered Email:</strong> {{ withdrawal.email }}
+          </li>
+        </ul>
+      </div>
+
+      @if(withdrawal.status.value === 'completed')
+      <div class="status-message completed">
+        <strong>Great news!</strong> Your withdrawal has been completed successfully. The funds have been transferred to your bank account ending in {{ bankAccountLastFour }} and should be available within 1-3 business days, depending on your bank's processing time.
+      </div>
+      @elseif(withdrawal.status.value === 'processing')
+      <div class="status-message processing">
+        <strong>Processing in Progress</strong><br>
+        Your withdrawal request is currently being processed. We're working on transferring the funds to your bank account ending in {{ bankAccountLastFour }}. You'll receive another notification once the transfer is completed.
+      </div>
+      @elseif(withdrawal.status.value === 'rejected')
+      <div class="status-message rejected">
+        <strong>Withdrawal Rejected</strong><br>
+        Unfortunately, your withdrawal request was rejected due to the following reason:
+        <br><br>
+        <strong>{{ withdrawal.actionReason?.reason }}</strong>
+        @if(withdrawal.actionReason?.suggestion)
+        <br>
+        {{ withdrawal.actionReason?.suggestion }}
+        @endif
+        @if(withdrawal.remarks)
+        <br><br><strong>Additional Information:</strong> {{ withdrawal.remarks }}
+        @endif
+      </div>
+      @elseif(withdrawal.status.value === 'failed')
+      <div class="status-message rejected">
+        <strong>Withdrawal Failed</strong><br>
+        Unfortunately, your withdrawal request failed due to the following reason:
+        <br><br>
+        <strong>{{ withdrawal.actionReason?.reason }}</strong>
+        @if(withdrawal.actionReason?.suggestion)
+        <br>
+        {{ withdrawal.actionReason?.suggestion }}
+        @endif
+        @if(withdrawal.remarks)
+        <br><br><strong>Additional Information:</strong> {{ withdrawal.remarks }}
+        @endif
+      </div>
+      @else
+      <div class="status-message">
+        <strong>Status Updated</strong><br>
+        Your withdrawal request status has been updated to "{{ withdrawal.status.value }}". 
+        @if(withdrawal.remarks)
+        <br><br><strong>Additional Information:</strong> {{ withdrawal.remarks }}
+        @endif
+      </div>
+      @endif
+
+      <div class="support-section">
+        <p>
+          If you have any questions or need assistance, feel free to reach out to our support team at 
+          <a href="mailto:{{ supportEmail }}">{{ supportEmail }}</a>.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <em>This is an automated email. Please do not reply to this message.</em>
+    </div>
+  </div>
+</body>
+</html> 

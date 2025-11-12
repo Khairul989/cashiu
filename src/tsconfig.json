@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "lib": ["ESNext", "dom"],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "isolatedModules": true,
+    "removeComments": true,
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictPropertyInitialization": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "skipLibCheck": true,
+    "declaration": false,
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "types": ["@types/node"],
+    "rootDir": "./",
+    "outDir": "./build",
+    "paths": {
+      "#audit_resolvers/*": ["./app/audit_resolvers/*.js"],
+      "#notifications/*": ["./app/notifications/*.js"]
+    }
+  },
+  "ts-node": {
+    "swc": true
+  },
+  "exclude": ["./build"]
+}
